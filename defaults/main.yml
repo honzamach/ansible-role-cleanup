@@ -1,0 +1,6 @@
+---
+
+#
+# List of files, that MUST NOT be present on target system.
+#
+hm_cleanup__remove_files: []
