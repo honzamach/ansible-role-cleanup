@@ -64,9 +64,9 @@ Internal variables
 Usage and customization
 --------------------------------------------------------------------------------
 
-This role is (attempted to be) written according to the `Ansible best practices <https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html>`__. The default implementation should fit most users,
-however you may customize it by tweaking default variables and providing custom
-templates.
+This role is (attempted to be) written according to the `Ansible best practices <https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html>`__. 
+The default implementation should fit most users, however you may customize it 
+by tweaking default variables and providing custom templates.
 
 
 Variable customizations
@@ -100,12 +100,12 @@ Example Playbook
 
 Example content of inventory file ``inventory``::
 
-    [servers-cleanup]
+    [servers_cleanup]
     localhost
 
 Example content of role playbook file ``playbook.yml``::
 
-    - hosts: servers-cleanup
+    - hosts: servers_cleanup
       remote_user: root
       roles:
         - role: honzamach.cleanup
