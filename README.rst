@@ -3,15 +3,9 @@
 Role **cleanup**
 ================================================================================
 
-Ansible role for convenient bulk filesystem cleanup on all target systems.
-
 * `Ansible Galaxy page <https://galaxy.ansible.com/honzamach/cleanup>`__
 * `GitHub repository <https://github.com/honzamach/ansible-role-cleanup>`__
 * `Travis CI page <https://travis-ci.org/honzamach/ansible-role-cleanup>`__
-
-
-Description
---------------------------------------------------------------------------------
 
 Purpose of this role is to enable the administrator to remove arbitrary number
 of files.
@@ -27,54 +21,20 @@ accidental mistakes, but be aware it can be easily bypassed.
 
     **Always use the file removal tool with caution !!!**
 
+**Table of Contents:**
 
-Requirements
---------------------------------------------------------------------------------
+* :ref:`section-role-cleanup-installation`
+* :ref:`section-role-cleanup-dependencies`
+* :ref:`section-role-cleanup-usage`
+* :ref:`section-role-cleanup-variables`
+* :ref:`section-role-cleanup-files`
+* :ref:`section-role-cleanup-author`
 
-This role does not have any special requirements.
-
-
-Dependencies
---------------------------------------------------------------------------------
-
-This role is not dependent on any other role.
-
-No other roles have direct dependency on this role.
+This role is part of the `MSMS <https://github.com/honzamach/msms>`__ package.
+Some common features are documented in its :ref:`manual <section-manual>`.
 
 
-Managed files
---------------------------------------------------------------------------------
-
-This role does not directly manage content of any files on target system.
-
-
-Internal variables
---------------------------------------------------------------------------------
-
-.. envvar:: hm_cleanup__remove_files
-
-    List of files, that MUST NOT be present on target system. Any file/directory
-    on this list will be removed from the target host.
-
-    * *Datatype:* ``list of strings``
-    * *Default value:* ``empty list``
-    * *Forbidden values:* ``["/","/bin","/boot","/lib","/root","/sbin","/usr","/var"]``
-
-
-Usage and customization
---------------------------------------------------------------------------------
-
-This role is (attempted to be) written according to the `Ansible best practices <https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html>`__. 
-The default implementation should fit most users, however you may customize it 
-by tweaking default variables and providing custom templates.
-
-
-Variable customizations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Most of the usefull variables are defined in ``defaults/main.yml`` file, so they
-can be easily overridden almost from `anywhere <https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable>`__.
-
+.. _section-role-cleanup-installation:
 
 Installation
 --------------------------------------------------------------------------------
@@ -95,15 +55,27 @@ Currently the advantage of using direct Git cloning is the ability to easily upd
 the role when new version comes out.
 
 
-Example Playbook
+.. _section-role-cleanup-dependencies:
+
+Dependencies
+--------------------------------------------------------------------------------
+
+This role is not dependent on any other role.
+
+No other roles have dependency on this role.
+
+
+.. _section-role-cleanup-usage:
+
+Usage
 --------------------------------------------------------------------------------
 
 Example content of inventory file ``inventory``::
 
     [servers_cleanup]
-    localhost
+    your-server
 
-Example content of role playbook file ``playbook.yml``::
+Example content of role playbook file ``role_playbook.yml``::
 
     - hosts: servers_cleanup
       remote_user: root
@@ -114,16 +86,61 @@ Example content of role playbook file ``playbook.yml``::
 
 Example usage::
 
-    ansible-playbook -i inventory playbook.yml
+    # Run everything:
+    ansible-playbook --ask-vault-pass --inventory inventory role_playbook.yml
+
+    # Do not remove useless packages from the cache:
+    ansible-playbook --ask-vault-pass --inventory inventory role_playbook.yml --extra-vars '{"hm_cleanup__autoclean":false}'
 
 
-License
+.. _section-role-cleanup-variables:
+
+Configuration variables
 --------------------------------------------------------------------------------
 
-MIT
+
+Internal role variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Author Information
+.. envvar:: hm_cleanup__autoclean
+
+    Remove useless packages from the cache.
+
+    * *Datatype:* ``bool``
+    * *Default:* ``true``
+
+.. envvar:: hm_cleanup__autoremove
+
+    Removing dependencies that are no longer required.
+
+    * *Datatype:* ``bool``
+    * *Default:* ``true``
+
+.. envvar:: hm_cleanup__remove_files
+
+    List of files, that MUST NOT be present on target system. Any file/directory
+    on this list will be removed from the target host.
+
+    * *Datatype:* ``list of strings``
+    * *Default:* ``empty list``
+    * *Forbidden values:* ``["/","/bin","/boot","/lib","/root","/sbin","/usr","/var"]``
+
+
+.. _section-role-cleanup-files:
+
+Managed files
 --------------------------------------------------------------------------------
 
-Honza Mach <honza.mach.ml@gmail.com>
+This role does not manage content of any files on target system.
+
+
+.. _section-role-cleanup-author:
+
+Author and license
+--------------------------------------------------------------------------------
+
+| *Copyright:* (C) since 2019 Honza Mach <honza.mach.ml@gmail.com>
+| *Author:* Honza Mach <honza.mach.ml@gmail.com>
+| Use of this role is governed by the MIT license, see LICENSE file.
+|

@@ -1,6 +1,7 @@
 ---
 
-#
-# List of files, that MUST NOT be present on target system.
-#
+hm_cleanup__autoclean: true
+
+hm_cleanup__autoremove: true
+
 hm_cleanup__remove_files: []
