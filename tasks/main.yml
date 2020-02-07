@@ -1,9 +1,9 @@
 ---
 
-- name: Removing unnecessary files and folders
-  file:
-    path: "{{ item }}"
-    state: absent
-  with_items: "{{ hm_cleanup__remove_files }}"
-  when: item not in ["/","/bin","/boot","/lib","/root","/sbin","/usr","/var"]
+- block:
 
+    - import_tasks: configure.debian.yml
+      tags:
+        - configure
+
+  when: ansible_os_family == 'Debian'
