@@ -8,11 +8,11 @@ Role **cleanup**
 * `Travis CI page <https://travis-ci.org/honzamach/ansible-role-cleanup>`__
 
 Purpose of this role is to enable the administrator to remove arbitrary number
-of files.
+of files and cleanup target systems.
 
 With the file removal, there is a lurking danger, that the administrator could
 accidentally delete essential directories or even the whole system (``rm -rf /``).
-There is a built-in safeguard within the task that is handling the file removal,
+There is a built-in safeguard within the role that is handling the file removal,
 which will refuse to delete few selected paths (see *forbidden values* below).
 This however should be considered only as a really basic protection against
 accidental mistakes, but be aware it can be easily bypassed.
@@ -89,8 +89,11 @@ Example usage::
     # Run everything:
     ansible-playbook --ask-vault-pass --inventory inventory role_playbook.yml
 
-    # Do not remove useless packages from the cache:
+    # Do not remove packages from the APT cache:
     ansible-playbook --ask-vault-pass --inventory inventory role_playbook.yml --extra-vars '{"hm_cleanup__autoclean":false}'
+
+    # Do not uninstall now unnecessary packages:
+    ansible-playbook --ask-vault-pass --inventory inventory role_playbook.yml --extra-vars '{"hm_cleanup__autoremove":false}'
 
 
 .. _section-role-cleanup-variables:
@@ -105,14 +108,14 @@ Internal role variables
 
 .. envvar:: hm_cleanup__autoclean
 
-    Remove useless packages from the cache.
+    Remove useless packages from the local APT cache.
 
     * *Datatype:* ``bool``
     * *Default:* ``true``
 
 .. envvar:: hm_cleanup__autoremove
 
-    Removing dependencies that are no longer required.
+    Removing dependencies that are no longer required (automatically installed packages).
 
     * *Datatype:* ``bool``
     * *Default:* ``true``
