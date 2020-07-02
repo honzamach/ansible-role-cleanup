@@ -7,8 +7,11 @@ Role **honzamach.cleanup**
 * `GitHub repository <https://github.com/honzamach/ansible-role-cleanup>`__
 * `Travis CI page <https://travis-ci.org/honzamach/ansible-role-cleanup>`__
 
-Purpose of this role is to enable the administrator to remove arbitrary number
-of files and cleanup target systems.
+Sometimes it is necessary to perform bulk cleanup on all managed servers. This
+role was created for just that. You may use it to regularly clear various APT
+caches and to ensure that given list of packages will not be present on managed
+hosts. You may also use it to remove arbitrary number of files and/or directories
+and cleanup all target systems.
 
 With the file removal, there is a lurking danger, that the administrator could
 accidentally delete essential directories or even the whole system (``rm -rf /``).
@@ -71,6 +74,9 @@ Usage
 --------------------------------------------------------------------------------
 
 Example content of inventory file ``inventory``::
+
+    [servers]
+    your-server
 
     [servers_cleanup]
     your-server
