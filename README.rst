@@ -120,6 +120,24 @@ Internal role variables
     * *Datatype:* ``bool``
     * *Default:* ``true``
 
+.. envvar:: hm_cleanup__remove_packages
+
+    List of packages defined separately for each linux distribution and package manager,
+    that MUST NOT be present on target system. Any package on this list will be removed
+    from target host. This role currently recognizes only ``apt`` for ``debian``.
+
+    * *Datatype:* ``dict``
+    * *Default:* (please see YAML file ``defaults/main.yml``)
+    * *Example:*
+
+    .. code-block:: yaml
+
+        hm_cleanup__remove_packages:
+          debian:
+            apt:
+              - needrestart
+              - ...
+
 .. envvar:: hm_cleanup__remove_files
 
     List of files, that MUST NOT be present on target system. Any file/directory

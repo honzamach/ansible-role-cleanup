@@ -4,4 +4,8 @@ hm_cleanup__autoclean: true
 
 hm_cleanup__autoremove: true
 
+hm_cleanup__remove_packages:
+  debian:
+    apt: []
+
 hm_cleanup__remove_files: []
