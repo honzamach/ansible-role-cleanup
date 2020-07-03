@@ -1,6 +1,6 @@
 .. _section-role-cleanup:
 
-Role **honzamach.cleanup**
+Role **cleanup**
 ================================================================================
 
 * `Ansible Galaxy page <https://galaxy.ansible.com/honzamach/cleanup>`__
