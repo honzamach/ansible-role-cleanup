@@ -24,6 +24,8 @@ Then execute the role::
 
     apbf role_cleanup.yml
 
+Please refer to role :ref:`cleanup <section-role-cleanup>` for more details.
+
 
 .. _section-cookbook-roles-cleanup-cleanupfiles:
 
@@ -41,3 +43,5 @@ of your ``inventory/group_vars/all/vars.yml`` file::
 Then execute the role::
 
     apbf role_cleanup.yml
+
+Please refer to role :ref:`cleanup <section-role-cleanup>` for more details.
